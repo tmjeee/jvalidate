@@ -1,7 +1,17 @@
 language: java
+
 jdk:
   - oraclejdk8
 
 branches:
   only:
     - master
+
+
+install:
+  - mvn clean install -Dmaven.test.skip=true
+
+
+script:
+  - mvn test
+
