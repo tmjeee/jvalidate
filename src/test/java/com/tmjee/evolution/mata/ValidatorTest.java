@@ -1,5 +1,6 @@
 package com.tmjee.evolution.mata;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -11,9 +12,15 @@ import static org.mockito.Mockito.verify;
  */
 public class ValidatorTest {
 
+    private Resolver mockResolver;
+
+    @Before
+    public void before() {
+        mockResolver = Mockito.mock(Resolver.class);
+    }
+
     @Test
     public void test_notEmpty() throws Exception {
-        Resolver mockResolver = Mockito.mock(Resolver.class);
 
         Validator v = Validators.notEmpty();
         v.validate("", "x", mockResolver);
@@ -24,5 +31,9 @@ public class ValidatorTest {
         verify(mockResolver, times(1)).registerError("x is empty");
         verify(mockResolver, times(1)).registerError("y is empty");
         verify(mockResolver, times(1)).registerError("z is empty");
+    }
+
+    public void test_() throws Exception {
+
     }
 }

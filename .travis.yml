@@ -27,4 +27,6 @@ after_failure:
   - echo "TRAVIS_TEST_RESULT=$TRAVIS_TEST_RESULT no deployment"
 
 after_success:
+  - mvn -Dmaven.test.skip=true deploy
   - mvn --settings settings.xml -Dmaven.test.skip=true deploy
+
