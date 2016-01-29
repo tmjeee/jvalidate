@@ -18,6 +18,9 @@ install:
 script:
   - mvn test
 
-deploy:
-  - test $TRAVIS_TEST_RESULT || echo "TRAVIS_TEST_RESULT=$TRAVIS_TEST_RESULT no deployment"
-  - test $TRAVIS_TEST_RESULT && mvn --settings settings.xml -Dmaven.test.skip=true deploy
+
+after_failure:
+  - echo "TRAVIS_TEST_RESULT=$TRAVIS_TEST_RESULT no deployment"
+
+after_success:
+  - mvn --settings settings.xml -Dmaven.test.skip=true deploy
