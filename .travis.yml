@@ -11,13 +11,13 @@ branches:
     - master
 
 before_install:
-  - pip install codecov
+  - sudo pip install codecov
 
 install:
   - mvn clean install -Dmaven.test.skip=true
 
 after_install:
-  - codecov
+  - sudo codecov
 
 script:
   - mvn test
