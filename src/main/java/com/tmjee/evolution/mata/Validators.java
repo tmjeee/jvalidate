@@ -8,7 +8,7 @@ import static java.lang.String.format;
 public class Validators {
 
     private static final Validator NOT_EMPTY = (Object o, String n, Resolver r)->{
-        if (o == null || o.toString().isEmpty()) {
+        if (o == null || o.toString().trim().isEmpty()) {
            r.registerError(format("%s is empty", n));
         }
     };

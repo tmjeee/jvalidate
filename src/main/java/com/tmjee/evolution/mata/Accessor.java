@@ -5,6 +5,6 @@ package com.tmjee.evolution.mata;
  */
 @FunctionalInterface
 public interface Accessor {
-    Object access(Object o, String property);
+    Object access(Object o);
 
 }

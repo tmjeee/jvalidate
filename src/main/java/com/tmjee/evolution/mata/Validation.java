@@ -20,7 +20,7 @@ public class Validation {
     public void validate(Resolver r){
         for (ValidationBuilder.Entry _e : e) {
             for(Validator _v :_e.v) {
-                Object o = _e.a.access(_e.o, _e.n);
+                Object o = _e.a.access(_e.o);
                 _v.validate(o, _e.n, r);
             }
         }

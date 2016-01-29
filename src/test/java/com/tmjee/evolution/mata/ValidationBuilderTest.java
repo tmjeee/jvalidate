@@ -29,10 +29,8 @@ public class ValidationBuilderTest {
     }
 
 
-
-
     @Test
-    public void test() throws Exception {
+    public void test1() throws Exception {
 
         TestObject testObject = new TestObject();
 
@@ -59,6 +57,76 @@ public class ValidationBuilderTest {
             assertThat(messages, hasItem(containsString("field1name is empty")));
             assertThat(messages, hasItem(containsString("method1Name is empty")));
             assertThat(messages, hasItem(containsString("pairName1 is empty")));
+        }
+    }
+
+
+    @Test
+    public void test2() throws Exception {
+
+        TestObject testObject = new TestObject();
+        testObject.field1 = 20;
+        testObject.method1 = 5;
+        testObject.pair1 = 3;
+
+        try {
+            new ValidationBuilder()
+                    .using(testObject)
+                        .withField("field1", "field1name")
+                            .addValidator(notEmpty())
+                            .addValidator(lessThan(10))
+                        .withMethod("method1", "method1Name")
+                            .addValidator(notEmpty())
+                            .addValidator(greaterThan(10))
+                        .withPair("pairName1", testObject.pair1())
+                            .addValidator(notEmpty())
+                            .addValidator(lessThan(2))
+                    .build()
+                    .validate();
+        } catch(ValidationException e) {
+            List<String> messages = e.getMessages();
+            for (String message : messages) {
+                System.out.println("msg: "+message);
+            }
+
+            assertEquals(messages.size(), 3);
+            assertThat(messages, hasItem(containsString("field1name is not less than 10")));
+            assertThat(messages, hasItem(containsString("method1Name is not greater than 10")));
+            assertThat(messages, hasItem(containsString("pairName1 is not less than 2")));
+        }
+    }
+
+
+
+    @Test
+    public void test3() throws Exception {
+
+        TestObject testObject = new TestObject();
+        testObject.field1 = 2;
+        testObject.method1 = 15;
+        testObject.pair1 = 1;
+
+        try {
+            new ValidationBuilder()
+                    .using(testObject)
+                    .withField("field1", "field1name")
+                    .addValidator(notEmpty())
+                    .addValidator(lessThan(10))
+                    .withMethod("method1", "method1Name")
+                    .addValidator(notEmpty())
+                    .addValidator(greaterThan(10))
+                    .withPair("pairName1", testObject.pair1())
+                    .addValidator(notEmpty())
+                    .addValidator(lessThan(2))
+                    .build()
+                    .validate();
+        } catch(ValidationException e) {
+            List<String> messages = e.getMessages();
+            for (String message : messages) {
+                System.out.println("msg: "+message);
+            }
+
+            assertEquals(messages.size(), 0);
         }
     }
 }
