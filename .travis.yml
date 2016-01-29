@@ -1,9 +1,5 @@
 language: java
 
-env:
-  global:
-    - CODECOV_TOKEN=5c939641-29e9-4357-8165-93dc171546f3
-
 os:
   - linux
 
@@ -14,14 +10,9 @@ branches:
   only:
     - master
 
-before_install:
-  - sudo pip install --user codecov
-
 install:
   - mvn clean install -Dmaven.test.skip=true
 
-after_install:
-  - sudo codecov
 
 script:
   - mvn test
@@ -31,6 +22,5 @@ after_failure:
   - echo "TRAVIS_TEST_RESULT=$TRAVIS_TEST_RESULT no deployment"
 
 after_success:
-  - mvn -Dmaven.test.skip=true report
   - mvn --settings settings.xml -Dmaven.test.skip=true deploy
 
