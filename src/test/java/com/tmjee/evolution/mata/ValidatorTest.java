@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -34,6 +35,10 @@ public class ValidatorTest {
     }
 
     public void test_() throws Exception {
+        Validator v = Validators.greaterThan(5);
+        v.validate("", "a", mockResolver);
+        v.validate("2", "b", mockResolver);
 
+        verify(mockResolver, times(1)).registerError("a is not greater than 5");
     }
 }
