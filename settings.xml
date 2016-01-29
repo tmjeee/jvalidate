@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+    <servers>
+        <server>
+            <id>github.repo</id>
+            <username>${env.githubusername}</username>
+            <password>${env.githubpassword}</password>
+        </server>
+    </servers>
+</settings>
