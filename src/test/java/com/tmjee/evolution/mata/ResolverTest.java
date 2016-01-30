@@ -13,8 +13,8 @@ public class ResolverTest {
     @Test
     public void test1() throws Exception {
         Resolver r = Resolvers.exceptionThrowingResolver();
-        r.registerError("test1");
-        r.registerError("test2");
+        r.registerError("field1", "an error with field1");
+        r.registerError("field2", "an error with field2");
         try {
             r.done();
         } catch(ValidationException e) {

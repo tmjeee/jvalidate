@@ -4,9 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 /**
  * @author tmjee
@@ -29,16 +27,21 @@ public class ValidatorTest {
         v.validate(" ", "z", mockResolver);
         v.validate(" a ", "a", mockResolver);
 
-        verify(mockResolver, times(1)).registerError("x is empty");
-        verify(mockResolver, times(1)).registerError("y is empty");
-        verify(mockResolver, times(1)).registerError("z is empty");
+        verify(mockResolver, times(1)).registerError("x", "x is empty");
+        verify(mockResolver, times(1)).registerError("y", "y is empty");
+        verify(mockResolver, times(1)).registerError("z", "z is empty");
+        verifyNoMoreInteractions(mockResolver);
     }
 
-    public void test_() throws Exception {
+    @Test
+    public void test_greaterThan() throws Exception {
         Validator v = Validators.greaterThan(5);
-        v.validate("", "a", mockResolver);
+        v.validate("a", "a", mockResolver);
         v.validate("2", "b", mockResolver);
+        v.validate("", "c", mockResolver);
 
-        verify(mockResolver, times(1)).registerError("a is not greater than 5");
+        verify(mockResolver, times(1)).registerError("a", "a is not a number");
+        verify(mockResolver, times(1)).registerError("b", "b is not greater than 5");
+        verifyNoMoreInteractions(mockResolver);
     }
 }

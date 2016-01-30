@@ -13,6 +13,7 @@ public class AccessorTest {
 
     static class TestObject {
         public Integer field1;
+        private Integer field2;
         private Integer method1;
         public Integer method1() {
             return method1;
@@ -28,7 +29,7 @@ public class AccessorTest {
 
 
     @Test
-    public void test_field() {
+    public void test_field1() {
         Accessor a = Accessors.field("field1");
 
         assertNull(a.access(t));
@@ -38,13 +39,38 @@ public class AccessorTest {
     }
 
     @Test
-    public void test_method() {
+    public void test_field2() {
+        Accessor a = Accessors.field("field2");
+
+        assertNull(a.access(t));
+
+        t.field2 = 2;
+        assertEquals(a.access(t), 2);
+
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void test_field3() {
+        Accessor a = Accessors.field("noSuchField");
+
+        a.access(t);
+    }
+
+    @Test
+    public void test_method1() {
         Accessor a = Accessors.method("method1");
 
         assertNull(a.access(t));
 
         t.method1=2;
         assertEquals(a.access(t), 2);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void test_method2() {
+        Accessor a = Accessors.method("noSuchMethod");
+
+        a.access(t);
     }
 
     @Test

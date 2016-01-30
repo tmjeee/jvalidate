@@ -18,7 +18,7 @@ public class Resolvers {
         private final List<String> messages = new ArrayList<>();
 
         @Override
-        public void registerError(String error) {
+        public void registerError(String name, String error) {
            messages.add(error);
         }
 
