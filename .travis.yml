@@ -1,5 +1,12 @@
 language: java
 
+notifications:
+  email:
+      recipients:
+        - tmjee1@gmail.com
+      on_success: change
+      on_failure: always
+
 os:
   - linux
 
@@ -15,12 +22,13 @@ install:
 
 
 script:
-  - mvn test
+  - mvn clean install
 
 
 after_failure:
   - echo "TRAVIS_TEST_RESULT=$TRAVIS_TEST_RESULT no deployment"
 
 after_success:
+  - mvn clean install mvn jacoco:report cobertura:cobertura coveralls:report
   - mvn --settings settings.xml -Dmaven.test.skip=true deploy
 
