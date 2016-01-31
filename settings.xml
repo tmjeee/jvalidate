@@ -3,7 +3,13 @@
     <servers>
         <server>
             <id>github</id>
-            <password>${env.githubpassword}</password>
+	    <!-- plain old username / password -->
+	    <username>${env.githubusername}</username>
+	    <password>${env.githubpassword}</password>
+	    <!-- 
+		 OAUTH2
+            <password>${env.githubtoken}</password>
+	    -->
         </server>
     </servers>
 </settings>
