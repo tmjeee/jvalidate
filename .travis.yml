@@ -30,5 +30,6 @@ after_failure:
 
 after_success:
   - mvn clean install jacoco:report cobertura:cobertura coveralls:report
-  - test $TRAVIS_TAG && echo "This is a tagged build $TRAVIS_TAG , Deployment will happen" &&  mvn -X --settings settings.xml -Dmaven.test.skip=true deploy
-  - test $TRAVIS_TAG || echo "This is NOT a tagged build, no deployment is going to happen"
+  - test $TRAVIS_TAG && printf "\n\n\n==================\n\tThis is a tagged build $TRAVIS_TAG , Deployment will happen\n=================\n\n\n" &&  mvn -X --settings settings.xml -Dmaven.test.skip=true deploy
+  - test $TRAVIS_TAG || printf "\n\n\n====================\n\tThis is NOT a tagged build, no deployment is going to happen\n================\n\n\n"
+
