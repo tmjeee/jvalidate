@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <settings>
-    <servers>
-        <server>
-            <id>github</id>
-	    <!-- plain old username / password -->
-	    <username>${env.githubusername}</username>
-	    <password>${env.githubpassword}</password>
-	    <!-- 
-		 OAUTH2
-            <password>${env.githubtoken}</password>
-	    -->
-        </server>
-    </servers>
+	<servers>
+		<server>
+			<id>github</id>
+			<!-- plain old username / password , doesn't work with Travis
+            <username>${env.githubusername}</username>
+            <password>${env.githubpassword}</password>
+            -->
+			<!--
+             OAUTH2
+             -->
+			<password>${env.githubtoken}</password>
+		</server>
+	</servers>
 </settings>
