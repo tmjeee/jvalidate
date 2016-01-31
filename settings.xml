@@ -2,7 +2,7 @@
 <settings>
     <servers>
         <server>
-            <id>github.maven.repo</id>
+            <id>github</id>
             <username>${env.githubusername}</username>
             <password>${env.githubpassword}</password>
         </server>
