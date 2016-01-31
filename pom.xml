@@ -24,9 +24,9 @@
     </properties>
 
     <scm>
-        <connection>scm:git:git@github.com:tmjee/mata.git</connection>
-        <url>scm:git:git@github.com:tmjee/mata.git</url>
-        <developerConnection>scm:git:git@github.com:tmjee/mata.git</developerConnection>
+        <connection>scm:git:git@github.com:tmjeee/mata.git</connection>
+        <url>scm:git:git@github.com:tmjeee/mata.git</url>
+        <developerConnection>scm:git:git@github.com:tmjeee/mata.git</developerConnection>
     </scm>
 
     <distributionManagement>
