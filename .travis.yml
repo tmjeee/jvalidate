@@ -1,3 +1,7 @@
+#
+# Travis build
+#
+
 language: java
 
 notifications:
@@ -27,10 +31,10 @@ script:
 
 
 after_failure:
-  - printf "\n\n\n" \
-    && printf "\t==========================================================" \
-    && printf "\n\tTRAVIS_TEST_RESULT=$TRAVIS_TEST_RESULT no deployment\n" \
-    && printf "\t==========================================================" \
+  - printf "\n\n\n"
+    && printf "\t=========================================================="
+    && printf "\n\tTRAVIS_TEST_RESULT=$TRAVIS_TEST_RESULT no deployment\n"
+    && printf "\t=========================================================="
     && printf "\n\n\n"
 
 after_success:
@@ -41,7 +45,7 @@ after_success:
     && printf "\n\tThis is a tagged build $TRAVIS_TAG , Deployment will happen\n"
     && printf "\t=================================================================="
     && printf "\n\n\n"
-    && mvn -X --settings settings.xml -Dmaven.test.skip=true deploy
+    && mvn --settings settings.xml -Dmaven.test.skip=true deploy
   - test "${TRAVIS_TAG}x" == "x"
     && printf "\n\n\n"
     && printf "\t==============================================================================="
@@ -49,10 +53,4 @@ after_success:
     && printf "\t==============================================================================="
     && printf "\n\n\n"
 
-
-before_deploy:
-  - echo "************ before deploy $TRAVIS_TAG "
-
-after_deploy:
-  - echo "************ after deploy $TRAVIS_TAG "
 
