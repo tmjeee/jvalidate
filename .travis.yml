@@ -30,5 +30,5 @@ after_failure:
 
 after_success:
   - mvn clean install jacoco:report cobertura:cobertura coveralls:report
-  - mvn --settings settings.xml -Dmaven.test.skip=true deploy
+  - mvn -X --settings settings.xml -Dmaven.test.skip=true deploy
 
