@@ -10,9 +10,12 @@ import static java.lang.String.format;
  */
 public class Validators {
 
-    private static final Validator NOT_EMPTY = (Object o, String n, Resolver r)->{
-        if (o == null || o.toString().trim().isEmpty()) {
-           r.registerError(n, format("%s is empty", n));
+    private static final Validator NOT_EMPTY = new Validator() {
+        @Override
+        public void  validate(Object o, String n, Resolver r) {
+            if (o == null || o.toString().trim().isEmpty()) {
+                r.registerError(n, format("%s is empty", n));
+            }
         }
     };
 
@@ -44,7 +47,7 @@ public class Validators {
     }
 
 
-    public static final Validator lessThan(int m) {
+    public static final Validator lessThan(final int m) {
         return new AbstractNumberValidator() {
             @Override
             protected void doValidate(Number _n, String n, Resolver r) {
@@ -55,7 +58,7 @@ public class Validators {
         };
     }
 
-    public static final Validator lessThanOrEquals(int m) {
+    public static final Validator lessThanOrEquals(final int m) {
         return new AbstractNumberValidator() {
             @Override
             protected void doValidate(Number _n, String n, Resolver r) {
@@ -67,7 +70,7 @@ public class Validators {
     }
 
 
-    public static final Validator greaterThan(int m) {
+    public static final Validator greaterThan(final int m) {
         return new AbstractNumberValidator() {
             @Override
             protected void doValidate(Number _n, String n, Resolver r) {
@@ -78,7 +81,7 @@ public class Validators {
         };
     }
 
-    public static final Validator greaterThanOrEquals(int m) {
+    public static final Validator greaterThanOrEquals(final int m) {
         return new AbstractNumberValidator() {
             @Override
             protected void doValidate(Number _n, String n, Resolver r) {

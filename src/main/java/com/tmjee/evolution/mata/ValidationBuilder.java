@@ -62,6 +62,10 @@ public class ValidationBuilder {
         return new Step_DefineRoot().using(o);
     }
 
+    public Step_DefineValidator withPair(String name, Object o) {
+        return new Step_DefineRoot().withPair(name, o);
+    }
+
 
     public class Step_DefineRoot {
         public Step_DefineProperty using(Object o) {
