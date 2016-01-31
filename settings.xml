@@ -3,7 +3,6 @@
     <servers>
         <server>
             <id>github</id>
-            <username>${env.githubusername}</username>
             <password>${env.githubpassword}</password>
         </server>
     </servers>
