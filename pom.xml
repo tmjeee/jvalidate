@@ -144,7 +144,7 @@
                 <artifactId>coveralls-maven-plugin</artifactId>
                 <version>4.1.0</version>
                 <configuration>
-                    <repoToken>${env.coverallstoken}</repoToken>
+                    <!--repoToken>${env.coverallstoken}</repoToken-->
                     <coberturaReports>
                         <coberturaReport>${basedir}/site/cobertura/coverage.xml</coberturaReport>
                     </coberturaReports>
