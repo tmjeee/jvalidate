@@ -145,12 +145,14 @@
                 <version>4.1.0</version>
                 <configuration>
                     <!--repoToken>${env.coverallstoken}</repoToken-->
+		    <!--
                     <coberturaReports>
                         <coberturaReport>${basedir}/site/cobertura/coverage.xml</coberturaReport>
                     </coberturaReports>
                     <jacocoReports>
                         <jacocoReport>${basedir}/site/jacoco/jacoco.xml</jacocoReport>
                     </jacocoReports>
+		    -->
                 </configuration>
             </plugin>
             <plugin>
