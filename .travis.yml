@@ -38,8 +38,8 @@ after_failure:
     && printf "\n\n\n"
 
 after_success:
-  - mvn clean install cobertura:cobertura coveralls:report
-  - mvn clean install jacoco:report coveralls:report
+  - mvn clean test cobertura:cobertura coveralls:report
+  - mvn clean test jacoco:report coveralls:report
   - test "${TRAVIS_TAG}x" != "x"
     && printf "\n\n\n"
     && printf "\t=================================================================="
