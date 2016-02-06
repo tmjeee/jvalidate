@@ -2,7 +2,6 @@ package com.tmjee.evolution.mata;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -18,8 +17,12 @@ public class AccessorTest {
         public Integer field1;
         private Integer field2;
         private Integer method1;
+        private Integer method2;
         public Integer method1() {
             return method1;
+        }
+        private Integer method2() {
+            return method2;
         }
     }
 
@@ -94,6 +97,19 @@ public class AccessorTest {
         a.access(mockObject);
     }
 
+    @Test(expected= RuntimeException.class)
+    public void test_method4() {
+        TestObject testObject = new TestObject();
+        Accessor a = Accessors.method("field3");
+        a.access(testObject);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void test_method5() {
+        TestObject testObject = new TestObject();
+        Accessor a = Accessors.method("method2");
+        a.access(testObject);
+    }
 
     @Test
     public void test_identity() {

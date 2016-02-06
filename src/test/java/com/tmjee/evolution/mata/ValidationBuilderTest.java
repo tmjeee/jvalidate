@@ -16,6 +16,8 @@ public class ValidationBuilderTest {
 
     static class TestObject {
         public Integer field1;
+        public Integer field2;
+        private Integer field3;
         private Integer method1;
         private Integer pair1;
 
@@ -72,12 +74,12 @@ public class ValidationBuilderTest {
         try {
             new ValidationBuilder()
                     .using(testObject)
-                        .withField("field1", "field1name")
-                            .addValidator(notEmpty())
-                            .addValidator(lessThan(10))
                         .withMethod("method1", "method1Name")
                             .addValidator(notEmpty())
                             .addValidator(greaterThan(10))
+                        .withField("field1", "field1name")
+                            .addValidator(notEmpty())
+                            .addValidator(lessThan(10))
                         .withPair("pairName1", testObject.pair1())
                             .addValidator(notEmpty())
                             .addValidator(lessThan(2))
@@ -110,14 +112,14 @@ public class ValidationBuilderTest {
             new ValidationBuilder()
                     .using(testObject)
                     .withField("field1", "field1name")
-                    .addValidator(notEmpty())
-                    .addValidator(lessThan(10))
+                        .addValidator(notEmpty())
+                        .addValidator(lessThan(10))
                     .withMethod("method1", "method1Name")
-                    .addValidator(notEmpty())
-                    .addValidator(greaterThan(10))
+                        .addValidator(notEmpty())
+                        .addValidator(greaterThan(10))
                     .withPair("pairName1", testObject.pair1())
-                    .addValidator(notEmpty())
-                    .addValidator(lessThan(2))
+                        .addValidator(notEmpty())
+                        .addValidator(lessThan(2))
                     .build()
                     .validate();
         } catch(ValidationException e) {
@@ -127,6 +129,27 @@ public class ValidationBuilderTest {
             }
 
             assertEquals(messages.size(), 0);
+        }
+    }
+
+
+    @Test
+    public void test4() throws Exception {
+        TestObject testObject = new TestObject();
+
+        try {
+            new ValidationBuilder()
+                    .withPair("field1", testObject.field1)
+                    .withPair("field2", testObject.field2)
+                        .addValidator(notEmpty())
+                .build()
+                .validate();
+        } catch(ValidationException e) {
+            List<String> messages = e.getMessages();
+            for(String message: messages) {
+                System.out.println("msg: "+message);
+            }
+            assertEquals(messages.size(), 1);
         }
     }
 }
