@@ -2,9 +2,12 @@ package com.tmjee.evolution.mata;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * @author tmjee
@@ -56,6 +59,15 @@ public class AccessorTest {
         a.access(t);
     }
 
+    @Test(expected = RuntimeException.class)
+    public void test_field4() {
+        Object mockObject = mock(Object.class);
+        when(mockObject.getClass()).thenThrow(new IllegalAccessException("testing"));
+
+        Accessor a = Accessors.field("someField");
+        a.access(mockObject);
+    }
+
     @Test
     public void test_method1() {
         Accessor a = Accessors.method("method1");
@@ -72,6 +84,16 @@ public class AccessorTest {
 
         a.access(t);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void test_method3() {
+        Object mockObject = mock(Object.class);
+        when(mockObject.getClass()).thenThrow(new IllegalAccessException("testing"));
+        Accessor a = Accessors.method("testMethod");
+
+        a.access(mockObject);
+    }
+
 
     @Test
     public void test_identity() {
