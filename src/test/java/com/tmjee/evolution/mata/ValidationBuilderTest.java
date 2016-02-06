@@ -152,4 +152,31 @@ public class ValidationBuilderTest {
             assertEquals(messages.size(), 1);
         }
     }
+
+    @Test
+    public void test5() throws Exception {
+        TestObject testObject = new TestObject();
+        try {
+            new ValidationBuilder()
+                .using(testObject)
+                    .withField("field1", "field1")
+                        .addValidator(notEmpty())
+                    .withMethod("method1", "method1")
+                        .addValidator(notEmpty())
+                .using(testObject)
+                    .withField("field2", "field2")
+                        .addValidator(notEmpty())
+                    .withMethod("method1", "method1")
+                        .addValidator(notEmpty())
+                .build()
+                .validate();
+        } catch(ValidationException e) {
+            List<String> messages = e.getMessages();
+            for(String message: messages) {
+                System.out.println("msg: "+message);
+            }
+            assertEquals(messages.size(), 4);
+        }
+
+    }
 }
